@@ -185,5 +185,5 @@ $('#guideButton').addEventListener('click',()=>{$('#guideAnswer').hidden=true;$(
 $$('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();}));
 window.addEventListener('hashchange',()=>navigate(location.hash.slice(1)||'home'));
 renderAll();navigate(location.hash.slice(1)||'home');
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7').catch(()=>{}));
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=8').catch(()=>{}));
 
