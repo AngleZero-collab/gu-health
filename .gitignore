@@ -1,0 +1,12 @@
+# Local IDE and temporary files
+.idea/
+output/
+tmp/
+
+# Native Android project is maintained separately from this public website
+android/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+

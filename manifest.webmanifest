@@ -1,0 +1,18 @@
+{
+  "name": "顧健康｜預防篩檢整合平台",
+  "short_name": "顧健康",
+  "description": "用簡單清楚的方式整理預防篩檢、居家視覺觀察與健康紀錄。",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f5f8f4",
+  "theme_color": "#174f40",
+  "lang": "zh-Hant-TW",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

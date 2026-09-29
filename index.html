@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#174f40"><meta name="description" content="簡單清楚地整理預防篩檢、居家視覺觀察與健康紀錄。">
+  <title>顧健康｜預防篩檢整合平台</title>
+  <link rel="manifest" href="manifest.webmanifest?v=6"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css?v=6"><script src="app.js?v=6" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#mainContent">跳到主要內容</a>
+<svg class="symbols" aria-hidden="true">
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 21 6v7c0 5-4 8-9 10-5-2-9-5-9-10V6l9-4Z"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11h-6v-7H9v7H3V10Z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12c5-8 15-8 20 0-5 8-15 8-20 0Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 2h9l4 4v16H6V2Z"/><path d="M15 2v5h4M9 12h7M9 16h7"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3 4 5c0 7 8 15 15 15l2-3-5-3-2 2c-3-1-5-3-6-6l2-2-3-5Z"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 22s7-6 7-13a7 7 0 1 0-14 0c0 7 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-5 3-8 8-8s8 3 8 8"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-1 .5-1 1.2-1 2.2M12 17h.01"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16"/></symbol>
+</svg>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="#home" data-nav="home" aria-label="顧健康首頁"><svg class="icon"><use href="#i-shield"></use></svg><span>顧健康</span></a>
+  <div class="header-actions"><span class="privacy-note">資料只存在這個瀏覽器</span><button class="icon-text-button" id="profileButton" type="button" aria-label="健康檔案"><svg class="icon"><use href="#i-user"></use></svg><span>健康檔案</span></button></div>
+</div></header>
+<main id="mainContent">
+  <section class="view active" id="view-home" aria-labelledby="homeTitle"><div class="page-shell">
+    <div class="hero"><div><span class="demo-badge" id="profileBadge">示範資料</span><h1 id="homeTitle">您好</h1><p id="homeSummary">正在整理可以確認的預防篩檢。</p></div><button class="secondary-button" id="switchProfileButton" type="button">編輯健康檔案</button></div>
+    <aside class="notice"><strong>先確認，再安排</strong><p>政策資料檢視日：2026 年 8 月 31 日。網站沒有連接健保或政府資料庫；實際資格、費用與受檢時間由醫療院所確認。</p></aside>
+    <div class="section-heading"><div><span class="eyebrow">我的篩檢清單</span><h2>現在可以向院所確認</h2></div><a class="official-link" href="https://escreening.hpa.gov.tw/Home" target="_blank" rel="noopener">官方院所查詢</a></div>
+    <div class="screening-list" id="screeningList" aria-live="polite"></div>
+    <div class="empty-state" id="screeningEmpty" hidden><svg class="icon"><use href="#i-check"></use></svg><h2>目前沒有待確認項目</h2><p>已登錄的檢查可到「我的紀錄」查看；仍可詢問醫師適合的預防照護。</p></div>
+  </div></section>
+  <section class="view" id="view-vision" aria-labelledby="visionTitle" hidden>
+    <div class="page-shell" id="visionLanding"><span class="eyebrow">居家視覺觀察</span><h1 id="visionTitle">一次看一眼，記下視覺變化</h1><p class="lead">這不是視力檢查或醫療診斷。看得清楚，也不能排除眼睛疾病。</p>
+      <div class="vision-intro"><div class="vision-art"><svg class="icon"><use href="#i-eye"></use></svg></div><div><h2>方格視覺自我觀察</h2><ol><li>戴上平常閱讀使用的眼鏡。</li><li>在光線充足處，手機保持舒適閱讀距離。</li><li>一次輕遮一眼，不要壓迫眼球。</li></ol><button class="primary-button" id="startVisionButton" type="button">我已了解，開始觀察</button></div></div>
+      <aside class="alert"><strong>需要儘速就醫的情況</strong><p>若突然視力下降、直線變形、中心出現黑影或視野缺損，請儘速聯絡眼科。</p></aside>
+    </div>
+    <div class="vision-test" id="visionTest" hidden aria-live="polite"><button class="text-button vision-exit" id="exitVisionButton" type="button">結束觀察</button><div class="vision-test-inner">
+      <div class="vision-grid-area" id="visionGridArea"><h1 id="visionInstruction">請遮住右眼，用左眼看中央黑點</h1><div class="amsler-grid" role="img" aria-label="均勻直線方格，中央有一個黑點"><span></span></div></div>
+      <div class="vision-answer-area" id="visionAnswerArea"><button class="vision-answer clear" type="button" data-vision-answer="看得很清楚">看得很清楚</button><button class="vision-answer changed" type="button" data-vision-answer="線條歪歪的／看不清楚">線條歪歪的／看不清楚</button></div>
+      <div class="vision-result" id="visionResult" hidden><span class="eyebrow">本次主觀觀察</span><h1>兩眼都完成了</h1><p id="visionResultText"></p><aside class="alert" id="visionResultAdvice"></aside><div class="button-stack"><button class="primary-button" id="saveVisionButton" type="button">儲存到我的紀錄</button><button class="secondary-button" id="discardVisionButton" type="button">不儲存，返回</button></div></div>
+    </div></div>
+  </section>
+  <section class="view" id="view-records" aria-labelledby="recordsTitle" hidden><div class="page-shell">
+    <div class="section-heading records-heading"><div><span class="eyebrow">保存在本機</span><h1 id="recordsTitle">我的紀錄</h1><p class="lead">自行登錄的檢查與觀察，不等同醫療院所正式報告。</p></div><div class="record-actions"><button class="secondary-button" id="exportButton" type="button"><svg class="icon"><use href="#i-download"></use></svg>匯出備份</button><button class="primary-button" id="addRecordButton" type="button"><svg class="icon"><use href="#i-plus"></use></svg>新增紀錄</button></div></div>
+    <div class="record-list" id="recordList"></div><div class="empty-state" id="recordEmpty" hidden><svg class="icon"><use href="#i-file"></use></svg><h2>還沒有紀錄</h2><p>可以從一次檢查、一次血壓量測，或今天想記住的事開始。</p></div>
+  </div></section>
+</main>
+<nav class="bottom-nav" aria-label="主要功能"><button class="nav-button active" type="button" data-nav="home" aria-current="page"><svg class="icon"><use href="#i-home"></use></svg><span>首頁</span></button><button class="nav-button" type="button" data-nav="vision"><svg class="icon"><use href="#i-eye"></use></svg><span>居家觀察</span></button><button class="nav-button" type="button" data-nav="records"><svg class="icon"><use href="#i-file"></use></svg><span>我的紀錄</span></button></nav>
+<button class="guide-fab" id="guideButton" type="button" aria-label="衛教小幫手"><svg class="icon"><use href="#i-help"></use></svg><span>衛教小幫手</span></button>
+<dialog class="dialog" id="screeningDialog"><form method="dialog"><button class="dialog-close" value="cancel" aria-label="關閉"><svg class="icon"><use href="#i-close"></use></svg></button></form><span class="eyebrow">篩檢說明</span><h2 id="screeningDialogTitle"></h2><p id="screeningDialogSummary"></p><dl class="detail-list"><div><dt>適用條件</dt><dd id="screeningDialogRule"></dd></div><div><dt>建議頻率</dt><dd id="screeningDialogFrequency"></dd></div><div><dt>目前紀錄</dt><dd id="screeningDialogStatus"></dd></div></dl><aside class="notice compact"><strong>請留意</strong><p id="screeningDialogPrep"></p></aside><div class="button-stack"><a class="primary-button link-button" id="screeningMapLink" target="_blank" rel="noopener"><svg class="icon"><use href="#i-map"></use></svg>尋找附近院所</a><a class="secondary-button link-button" id="screeningSourceLink" target="_blank" rel="noopener">查看官方政策</a></div></dialog>
+<dialog class="dialog" id="profileDialog"><form id="profileForm"><button class="dialog-close" type="button" data-close-dialog="profileDialog" aria-label="關閉"><svg class="icon"><use href="#i-close"></use></svg></button><span class="eyebrow">只存在這個瀏覽器</span><h2>編輯健康檔案</h2><div class="form-grid"><label>姓名或暱稱<input name="name" maxlength="30" required autocomplete="off"></label><label>出生日期<input name="birth" type="date" required></label><label>篩檢比對使用的生理性別<select name="sex"><option>未提供</option><option>女</option><option>男</option></select></label><label>居住縣市<input name="city" maxlength="20" placeholder="例如：台北市"></label></div><fieldset><legend>與篩檢條件有關的背景（選填）</legend><label class="check-row"><input type="checkbox" name="indigenous">具原住民身分</label><label class="check-row"><input type="checkbox" name="polio">有小兒麻痺病史</label><label class="check-row"><input type="checkbox" name="familyColon">一等親有大腸癌病史</label><label class="check-row"><input type="checkbox" name="familyLung">一等親有肺癌病史</label><label class="check-row"><input type="checkbox" name="smokes">目前仍吸菸</label><label class="check-row"><input type="checkbox" name="betel">曾嚼檳榔</label><div class="form-grid compact-grid"><label>累積吸菸包年<input name="packYears" type="number" min="0" max="300" value="0"></label><label>戒菸年數<input name="quitYears" type="number" min="-1" max="100" value="-1"></label></div></fieldset><label class="check-row consent"><input type="checkbox" name="consent" required>這是我的資料，或我已取得本人同意</label><button class="primary-button full-button" type="submit">儲存健康檔案</button></form></dialog>
+<dialog class="dialog" id="recordDialog"><form id="recordForm"><button class="dialog-close" type="button" data-close-dialog="recordDialog" aria-label="關閉"><svg class="icon"><use href="#i-close"></use></svg></button><span class="eyebrow">自行登錄</span><h2>新增健康紀錄</h2><label>紀錄類型<select name="kind" id="recordKind"><option value="note">日常照護筆記</option><option value="bp">血壓量測</option><option value="screening">已完成的檢查</option></select></label><label id="recordTitleField">標題<input name="title" maxlength="60" placeholder="例如：今天陪媽媽散步"></label><label id="recordPolicyField" hidden>檢查項目<select name="policy" id="recordPolicy"></select></label><div class="form-grid" id="recordBpFields" hidden><label>收縮壓<input name="systolic" type="number" min="30" max="300"></label><label>舒張壓<input name="diastolic" type="number" min="20" max="200"></label></div><label>日期<input name="date" type="date" required></label><label>備註<textarea name="note" maxlength="1000" rows="4" placeholder="想記下的事（選填）"></textarea></label><button class="primary-button full-button" type="submit">儲存這筆紀錄</button></form></dialog>
+<dialog class="dialog guide-dialog" id="guideDialog"><form method="dialog"><button class="dialog-close" value="cancel" aria-label="關閉"><svg class="icon"><use href="#i-close"></use></svg></button></form><span class="eyebrow">不儲存、不上傳</span><h2>基本衛教小幫手</h2><p>輸入內容只在這個頁面暫時處理，不會寫入健康紀錄。只能提供基本衛教與建議科別，不能診斷。</p><label>想詢問什麼？<textarea id="guideQuestion" rows="4" maxlength="500" placeholder="例如：最近眼睛看東西有點模糊"></textarea></label><button class="primary-button full-button" id="askGuideButton" type="button">查看基本衛教</button><div class="guide-answer" id="guideAnswer" hidden aria-live="polite"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>
