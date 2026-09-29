@@ -10,11 +10,24 @@ const defaultState={
   version:2,demo:true,
   profile:{name:'林媽媽（示範）',birth:'1954-03-15',sex:'女',city:'台北市',indigenous:false,polio:false,familyColon:false,familyLung:false,smokes:false,betel:false,packYears:0,quitYears:-1},
   records:[
+    {id:'demo-adult',kind:'screening',key:'adult',title:'成人預防保健',date:'2026-04-10',note:'示範資料：已完成成人預防保健服務。',flag:false},
+    {id:'demo-colon',kind:'screening',key:'colon',title:'大腸癌篩檢',date:'2026-06-18',note:'示範資料：已完成採便檢查。',flag:false},
     {id:'demo-dental',kind:'screening',key:'dental',title:'牙科定期追蹤',date:'2026-08-23',note:'示範資料：例行口腔追蹤。',flag:false},
     {id:'demo-note',kind:'note',key:'',title:'陪媽媽一起散步',date:'2026-08-29',note:'示範資料：到公園走了 20 分鐘。',flag:false}
   ]
 };
-function loadState(){try{const data=JSON.parse(localStorage.getItem(STORAGE_KEY));if(data?.profile&&Array.isArray(data.records))return data;}catch{}return structuredClone(defaultState);}
+function loadState(){
+  try{
+    const data=JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(data?.profile&&Array.isArray(data.records)){
+      if(data.demo){
+        defaultState.records.filter(record=>record.kind==='screening').forEach(record=>{if(!data.records.some(saved=>saved.id===record.id))data.records.push(structuredClone(record));});
+      }
+      return data;
+    }
+  }catch{}
+  return structuredClone(defaultState);
+}
 let state=loadState();
 let currentView='home';
 let activePolicy=null;
@@ -47,6 +60,13 @@ function isDue(policy){
   const last=lastRecord(policy.id);if(!last)return true;
   if(policy.id==='hpv')return ageAt(state.profile.birth,parseDate(last.date))!==age();
   return addMonths(last.date,policy.months(state.profile))<=new Date();
+}
+function displayDate(value){const [y,m,d]=String(value).split('-');return `${y} 年 ${Number(m)} 月 ${Number(d)} 日`;}
+function taskMeta(policy,last){
+  if(!last)return `尚未登錄完成日期・${frequency(policy)}`;
+  if(policy.id==='hpv')return isDue(policy)?`上次完成：${displayDate(last.date)}・目前階段待向院所確認`:`完成日期：${displayDate(last.date)}・本階段已登錄`;
+  const next=addMonths(last.date,policy.months(state.profile));const nextValue=next.toLocaleDateString('sv-SE');
+  return isDue(policy)?`上次完成：${displayDate(last.date)}・可再次向院所確認`:`上次完成：${displayDate(last.date)}・${displayDate(nextValue)}後再確認`;
 }
 function icon(name){return `<svg class="icon" aria-hidden="true"><use href="#i-${name}"></use></svg>`;}
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),3500);}
@@ -86,6 +106,7 @@ function openProfile(){
   form.elements.consent.checked=false;$('#profileDialog').showModal();
 }
 function renderRecords(){
+  renderScreeningProgress();
   const list=$('#recordList');list.replaceChildren();const records=[...state.records].sort((a,b)=>b.date.localeCompare(a.date)||String(b.id).localeCompare(String(a.id)));
   $('#recordEmpty').hidden=records.length!==0;let day='';
   records.forEach(record=>{
@@ -95,9 +116,32 @@ function renderRecords(){
     const remove=document.createElement('button');remove.className='text-button';remove.type='button';remove.textContent='刪除這筆紀錄';remove.addEventListener('click',()=>{if(confirm(`確定刪除「${record.title}」？這個動作無法復原。`)){state.records=state.records.filter(r=>r.id!==record.id);save();renderAll();toast('紀錄已刪除');}});card.append(remove);list.append(card);
   });
 }
+function renderScreeningProgress(){
+  const eligible=policies.filter(policy=>policy.public!==false&&policy.eligible(state.profile));
+  const current=eligible.filter(policy=>!isDue(policy));const due=eligible.filter(isDue);const total=eligible.length;
+  $('#screeningProgressTitle').textContent=`${state.profile.name}的健檢進度`;
+  $('#screeningProgressCount').textContent=total?`${current.length} / ${total} 項已登錄`:'目前沒有適用項目';
+  $('#screeningProgressSummary').textContent=total?`${current.length} 項目前已登錄，${due.length} 項待向院所確認。`:'依目前健康檔案，尚未整理出適用的公費篩檢項目。';
+  const track=$('#screeningProgressTrack');track.setAttribute('aria-valuemax',String(total));track.setAttribute('aria-valuenow',String(current.length));
+  $('#screeningProgressFill').style.width=`${total?Math.round(current.length/total*100):0}%`;
+  const list=$('#screeningTaskList');list.replaceChildren();
+  [...due,...current].forEach(policy=>{
+    const pending=isDue(policy);const last=lastRecord(policy.id);const card=document.createElement('article');card.className=`screening-task ${pending?'pending':'complete'}`;
+    const marker=document.createElement('div');marker.className='task-marker';marker.innerHTML=icon(pending?'file':'check');
+    const copy=document.createElement('div');copy.className='task-copy';const h=document.createElement('h3');h.textContent=policy.title;const meta=document.createElement('p');meta.textContent=taskMeta(policy,last);copy.append(h,meta);
+    const controls=document.createElement('div');controls.className='task-controls';const status=document.createElement('span');status.className='task-status';status.textContent=pending?'待確認':'目前已完成';
+    const record=document.createElement('button');record.type='button';record.className=pending?'primary-button task-button':'secondary-button task-button';record.textContent=last?'更新完成日期':'登錄已完成';record.addEventListener('click',()=>openRecordDialog(policy.id));
+    const detail=document.createElement('button');detail.type='button';detail.className='text-button task-button';detail.textContent='查看資格';detail.addEventListener('click',()=>openPolicy(policy));
+    controls.append(status,record,detail);card.append(marker,copy,controls);list.append(card);
+  });
+  if(!total){const empty=document.createElement('div');empty.className='progress-empty';empty.textContent='請先編輯健康檔案，或向家庭醫學科詢問適合的預防照護。';list.append(empty);}
+}
 function populatePolicySelect(){const select=$('#recordPolicy');select.replaceChildren();policies.forEach(p=>select.add(new Option(p.title,p.id)));}
 function updateRecordFields(){
   const kind=$('#recordKind').value;$('#recordTitleField').hidden=kind!=='note';$('#recordPolicyField').hidden=kind!=='screening';$('#recordBpFields').hidden=kind!=='bp';
+}
+function openRecordDialog(policyId=''){
+  const form=$('#recordForm');form.reset();form.elements.date.value=today();form.elements.kind.value=policyId?'screening':'note';updateRecordFields();if(policyId)form.elements.policy.value=policyId;$('#recordDialog').showModal();
 }
 function addRecord(event){
   event.preventDefault();const form=event.currentTarget;const data=new FormData(form);const kind=data.get('kind');const date=String(data.get('date'));
@@ -134,12 +178,12 @@ $$('[data-nav]').forEach(el=>el.addEventListener('click',event=>{event.preventDe
 $('#profileButton').addEventListener('click',openProfile);$('#switchProfileButton').addEventListener('click',openProfile);
 $$('[data-close-dialog]').forEach(button=>button.addEventListener('click',()=>document.getElementById(button.dataset.closeDialog).close()));
 $('#profileForm').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;const data=new FormData(form);state.profile={name:String(data.get('name')).trim(),birth:String(data.get('birth')),sex:String(data.get('sex')),city:String(data.get('city')||'').trim(),indigenous:data.has('indigenous'),polio:data.has('polio'),familyColon:data.has('familyColon'),familyLung:data.has('familyLung'),smokes:data.has('smokes'),betel:data.has('betel'),packYears:Number(data.get('packYears')||0),quitYears:Number(data.get('quitYears')??-1)};state.demo=false;save();$('#profileDialog').close();renderAll();toast('健康檔案已儲存在這個瀏覽器');});
-$('#addRecordButton').addEventListener('click',()=>{$('#recordForm').reset();$('#recordForm').elements.date.value=today();updateRecordFields();$('#recordDialog').showModal();});
+$('#addRecordButton').addEventListener('click',()=>openRecordDialog());
 $('#recordKind').addEventListener('change',updateRecordFields);$('#recordForm').addEventListener('submit',addRecord);$('#exportButton').addEventListener('click',exportData);
 $('#startVisionButton').addEventListener('click',startVision);$('#exitVisionButton').addEventListener('click',()=>finishVision(false));$$('[data-vision-answer]').forEach(button=>button.addEventListener('click',()=>answerVision(button.dataset.visionAnswer)));$('#saveVisionButton').addEventListener('click',()=>finishVision(true));$('#discardVisionButton').addEventListener('click',()=>finishVision(false));
 $('#guideButton').addEventListener('click',()=>{$('#guideAnswer').hidden=true;$('#guideAnswer').textContent='';$('#guideQuestion').value='';$('#guideDialog').showModal();});$('#askGuideButton').addEventListener('click',askGuide);
 $$('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();}));
 window.addEventListener('hashchange',()=>navigate(location.hash.slice(1)||'home'));
 renderAll();navigate(location.hash.slice(1)||'home');
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6').catch(()=>{}));
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7').catch(()=>{}));
 

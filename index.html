@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#174f40"><meta name="description" content="簡單清楚地整理預防篩檢、居家視覺觀察與健康紀錄。">
   <title>顧健康｜預防篩檢整合平台</title>
-  <link rel="manifest" href="manifest.webmanifest?v=6"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css?v=6"><script src="app.js?v=6" defer></script>
+  <link rel="manifest" href="manifest.webmanifest?v=7"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css?v=7"><script src="app.js?v=7" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#mainContent">跳到主要內容</a>
@@ -46,7 +46,15 @@
     </div></div>
   </section>
   <section class="view" id="view-records" aria-labelledby="recordsTitle" hidden><div class="page-shell">
-    <div class="section-heading records-heading"><div><span class="eyebrow">保存在本機</span><h1 id="recordsTitle">我的紀錄</h1><p class="lead">自行登錄的檢查與觀察，不等同醫療院所正式報告。</p></div><div class="record-actions"><button class="secondary-button" id="exportButton" type="button"><svg class="icon"><use href="#i-download"></use></svg>匯出備份</button><button class="primary-button" id="addRecordButton" type="button"><svg class="icon"><use href="#i-plus"></use></svg>新增紀錄</button></div></div>
+    <div class="section-heading records-heading"><div><span class="eyebrow">保存在本機</span><h1 id="recordsTitle">我的健檢與紀錄</h1><p class="lead">一眼看懂已登錄與待確認的健檢，也能回顧每一次健康紀錄。</p></div><div class="record-actions"><button class="secondary-button" id="exportButton" type="button"><svg class="icon"><use href="#i-download"></use></svg>匯出備份</button><button class="primary-button" id="addRecordButton" type="button"><svg class="icon"><use href="#i-plus"></use></svg>新增紀錄</button></div></div>
+    <section class="screening-progress" aria-labelledby="screeningProgressTitle">
+      <div class="progress-heading"><div><span class="eyebrow">健檢進度</span><h2 id="screeningProgressTitle">目前健檢任務</h2></div><strong class="progress-count" id="screeningProgressCount">正在整理</strong></div>
+      <div class="progress-track" id="screeningProgressTrack" role="progressbar" aria-label="健檢完成進度" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><span id="screeningProgressFill"></span></div>
+      <p class="progress-summary" id="screeningProgressSummary">依健康檔案與本機紀錄整理。</p>
+      <div class="screening-task-list" id="screeningTaskList" aria-live="polite"></div>
+      <p class="progress-note">這是依固定政策與您自行登錄資料做的初步整理，並非政府或健保資格查詢。實際資格與受檢時間請向醫療院所確認。</p>
+    </section>
+    <div class="record-history-heading"><span class="eyebrow">完整紀錄</span><h2>歷次健康紀錄</h2><p>包含健檢、血壓、居家觀察與日常照護筆記。</p></div>
     <div class="record-list" id="recordList"></div><div class="empty-state" id="recordEmpty" hidden><svg class="icon"><use href="#i-file"></use></svg><h2>還沒有紀錄</h2><p>可以從一次檢查、一次血壓量測，或今天想記住的事開始。</p></div>
   </div></section>
 </main>
