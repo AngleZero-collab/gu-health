@@ -29,3 +29,16 @@ tmp/
 .DS_Store
 Thumbs.db
 
+# iOS generated builds, signing material and local Xcode state
+ios/.build/
+ios/.swiftpm/
+ios/build/
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.ipa
+*.xcarchive/
+*.mobileprovision
+*.cer
+
