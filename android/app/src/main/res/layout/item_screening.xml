@@ -1,0 +1,13 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp"
+    android:minHeight="64dp" android:clickable="true" android:focusable="true" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="1dp" app:strokeColor="@color/soft_green" app:cardBackgroundColor="@color/white">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+        <TextView android:id="@+id/screening_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textAppearance="@style/CareHeading" android:textSize="24sp" />
+        <TextView android:id="@+id/screening_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:textAppearance="@style/CareBody" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/btn_dial" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="72dp"
+            android:layout_marginTop="16dp" android:text="@string/dial_clinic" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/btn_maps" style="@style/CareButton.Secondary" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="72dp"
+            android:layout_marginTop="12dp" android:text="@string/find_clinic" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/clinic_note" android:textAppearance="@style/CareBody" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

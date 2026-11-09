@@ -1,0 +1,78 @@
+plugins { id 'com.android.application' }
+
+def modelPath = providers.gradleProperty('guhealthModel')
+def withReportModel = modelPath.isPresent()
+def preparedAssets = layout.buildDirectory.dir('generated/reportModelAssets')
+
+android {
+    namespace 'com.gucare.health'
+    compileSdk 36
+    bundle { language { enableSplit = false } }
+    defaultConfig {
+        applicationId 'com.gucare.health'
+        minSdk 26
+        targetSdk 36
+        versionCode 3
+        versionName '2.1.0'
+        testInstrumentationRunner 'com.gucare.health.ReportDeviceCheck'
+        if (withReportModel) ndk { abiFilters 'arm64-v8a' }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    lint { abortOnError true }
+    sourceSets.main.java.srcDir(withReportModel ? 'src/localAi/java' : 'src/basic/java')
+    if (withReportModel) {
+        sourceSets.main.assets.srcDir(preparedAssets)
+        sourceSets.main.assets.srcDir('src/localAi/assets')
+        androidResources { noCompress += ['litertlm'] }
+    }
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.all {
+            maxHeapSize = '2g'
+            systemProperty 'robolectric.dependency.repo.url', 'https://repo.maven.apache.org/maven2'
+            jvmArgs '--add-opens=java.base/java.lang=ALL-UNNAMED',
+                    '--add-opens=java.base/java.util=ALL-UNNAMED',
+                    '--add-opens=java.base/java.io=ALL-UNNAMED',
+                    '--add-opens=java.base/java.net=ALL-UNNAMED',
+                    '--add-opens=java.base/java.security=ALL-UNNAMED',
+                    '--add-opens=java.base/java.text=ALL-UNNAMED',
+                    '--add-opens=java.base/jdk.internal.access=ALL-UNNAMED',
+                    '--add-opens=java.desktop/java.awt.font=ALL-UNNAMED'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.google.android.material:material:1.13.0'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    if (withReportModel) implementation 'com.google.ai.edge.litertlm:litertlm-android:0.18.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.16'
+}
+
+if (withReportModel) {
+    def modelFile = rootProject.file(modelPath.get())
+    def verifyModel = tasks.register('prepareReportModel', Sync) {
+        inputs.file(modelFile)
+        from(modelFile) { rename { 'Qwen3-0.6B.litertlm' } }
+        into(preparedAssets)
+        doFirst {
+            def digest = java.security.MessageDigest.getInstance('SHA-256')
+            modelFile.withInputStream { stream ->
+                byte[] buffer = new byte[1024 * 1024]
+                int count
+                while ((count = stream.read(buffer)) != -1) digest.update(buffer, 0, count)
+            }
+            if (digest.digest().encodeHex().toString() != 'c5f39b4191926786c3e6668b62af4d6eb15248dfc7a5348252a9b406f33f2108') {
+                throw new GradleException('The bundled model must match Qwen3-0.6B.litertlm revision e668717.')
+            }
+        }
+    }
+    tasks.named('preBuild') { dependsOn(verifyModel) }
+}

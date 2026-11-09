@@ -1,0 +1,66 @@
+<resources>
+    <style name="AppThemeBase" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/dark_green</item>
+        <item name="colorPrimaryVariant">@color/navy</item>
+        <item name="colorSecondary">@color/dark_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColorPrimary">@color/body_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="materialButtonStyle">@style/CareButton</item>
+        <item name="android:buttonStyle">@style/PlatformCareButton</item>
+        <item name="android:alertDialogTheme">@style/CarePlatformDialog</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#226453</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">#1E5B49</item>
+        <item name="android:statusBarColor">#F5F8F4</item>
+        <item name="android:windowBackground">#F5F8F4</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+    <style name="AppTheme" parent="AppThemeBase" />
+    <style name="CareButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">64dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="backgroundTint">@color/dark_green</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="CareButton.Secondary">
+        <item name="backgroundTint">@color/soft_green</item>
+        <item name="android:textColor">@color/dark_green</item>
+    </style>
+    <style name="CareHeading" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/dark_green</item>
+    </style>
+    <style name="CareBody" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/secondary_text</item>
+    </style>
+    <style name="CareNavigation" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="PlatformCareButton" parent="android:style/Widget.Material.Button.Borderless">
+        <item name="android:minHeight">64dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dark_green</item>
+    </style>
+    <style name="CarePlatformDialog" parent="android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:colorAccent">@color/dark_green</item>
+        <item name="android:buttonBarButtonStyle">@style/PlatformCareButton</item>
+        <item name="android:windowMinWidthMajor">94%</item>
+        <item name="android:windowMinWidthMinor">94%</item>
+    </style>
+</resources>

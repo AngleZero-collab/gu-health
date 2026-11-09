@@ -1,0 +1,11 @@
+<resources>
+    <color name="dark_green">#174F40</color>
+    <color name="navy">#173D45</color>
+    <color name="alert_orange">#A8490C</color>
+    <color name="soft_orange">#FFF0E3</color>
+    <color name="background">#F5F8F4</color>
+    <color name="soft_green">#E3F1E7</color>
+    <color name="body_text">#304F43</color>
+    <color name="secondary_text">#506459</color>
+    <color name="white">#FFFFFF</color>
+</resources>

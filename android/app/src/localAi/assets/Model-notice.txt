@@ -1,0 +1,6 @@
+Bundled model: Qwen3-0.6B, Qwen Team, Alibaba Cloud.
+Original model: https://huggingface.co/Qwen/Qwen3-0.6B
+LiteRT-LM conversion: https://huggingface.co/litert-community/Qwen3-0.6B/tree/e668717
+Model and LiteRT-LM runtime are licensed under Apache License 2.0.
+The model is distributed as the original LiteRT Community conversion, unmodified.
+See Apache-2.0.txt for the full license.

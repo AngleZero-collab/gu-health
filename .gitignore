@@ -3,8 +3,27 @@
 output/
 tmp/
 
-# Native Android project is maintained separately from this public website
-android/
+# Local settings and private data
+.codex/
+.agents/
+.aws/
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pem
+*.db
+*.db-wal
+*.db-shm
+
+# Publish application source; keep generated installers and model weights out of Git
+*.apk
+*.aab
+*.litertlm
+*.gguf
+*.download
 
 # Operating system files
 .DS_Store

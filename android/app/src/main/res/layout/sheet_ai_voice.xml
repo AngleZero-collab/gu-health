@@ -1,0 +1,12 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="24dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/voice_title" android:textAppearance="@style/CareHeading" android:textSize="24sp" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="@string/voice_privacy" android:textAppearance="@style/CareBody" />
+        <TextView android:id="@+id/voice_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginVertical="24dp"
+            android:minHeight="64dp" android:text="@string/voice_checking" android:textAppearance="@style/CareBody" android:accessibilityLiveRegion="polite" android:saveEnabled="false" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/voice_start" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="80dp"
+            android:text="@string/voice_start" android:enabled="false" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/voice_close" style="@style/CareButton.Secondary" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:text="@string/voice_close" />
+    </LinearLayout>
+</ScrollView>

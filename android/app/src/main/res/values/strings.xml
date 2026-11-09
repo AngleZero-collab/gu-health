@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">顧健康</string>
+    <string name="nav_home">首頁</string>
+    <string name="nav_vision">居家觀察</string>
+    <string name="nav_records">我的紀錄</string>
+    <string name="greeting">%1$s，\n有 %2$d 項健檢可確認</string>
+    <string name="screening_note">依您填寫的資料初步整理。是否免費、何時能做，請向院所確認。</string>
+    <string name="dial_clinic">📞 打電話預約</string>
+    <string name="find_clinic">🗺️ 尋找附近院所</string>
+    <string name="clinic_note">點卡片看說明。撥號頁需填入院所電話。</string>
+    <string name="vision_clear">看得很清楚</string>
+    <string name="vision_changed">線條歪歪的／看不清楚</string>
+    <string name="voice_title">語音健康管家</string>
+    <string name="voice_privacy">裝置端衛教模擬，不是醫療診斷。\n不保留對話、不寫入健康紀錄。</string>
+    <string name="voice_start">按一下，開始說話</string>
+    <string name="voice_close">關閉語音管家</string>
+    <string name="reminders">提醒</string>
+    <string name="settings">設定</string>
+    <string name="show_reminders">查看提醒</string>
+    <string name="voice_checking">正在確認手機的離線語音功能…</string>
+    <string name="grid_description">均勻直線方格，請注視中央黑點</string>
+    <string name="change_profile">切換或新增家人</string>
+    <string name="start_observation">開始居家觀察</string>
+    <string name="voice_hint">點右下角麥克風，可以詢問基本衛教。</string>
+    <string name="open_voice">開啟語音健康管家</string>
+</resources>
