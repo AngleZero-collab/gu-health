@@ -9,6 +9,7 @@ export function needsUpdateHistory(paths) {
   return paths.some(path => webFiles.has(path)
     || path === '.gitignore'
     || /^android\/(?:app\/src\/|gradle\/|.*\.(?:gradle|properties|ps1)$|gradlew(?:\.bat)?$)/.test(path)
+    || /^ios\/(?:GuHealth\/|GuHealthCoreTests\/|GuHealthUITests\/|scripts\/|GuHealth\.xcodeproj\/|Package\.swift$)/.test(path)
     || /^\.github\/(?:scripts|workflows)\//.test(path));
 }
 

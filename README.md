@@ -1,8 +1,10 @@
 # 顧健康｜國民健康預防篩檢整合平台
 
-這個儲存庫包含「顧健康」的 Android 原生 App 與響應式 PWA 網站，面向高齡者與家屬，整理預防篩檢、居家視覺觀察與健康紀錄。
+這個儲存庫包含「顧健康」的 Android 原生 App、iOS 原生預覽版與響應式 PWA 網站，面向高齡者與家屬，整理預防篩檢、居家視覺觀察與健康紀錄。
 
 Android 目前版本為 **2.1.0**，包含裝置端 AI 白話文健檢報告。原始碼、編譯與安裝說明見 [Android 說明](android/README.md)。下列功能與啟動方式介紹 PWA 網站。
+
+iOS **1.0.0 預覽版**採用 SwiftUI，支援 iOS 17 以上，可在 Xcode 開啟 `ios/GuHealth.xcodeproj`。已移植基本報告解說與 Android JSON 備份匯入，尚未移植 Qwen 模型，也未提供已簽署 IPA。功能對照、iPhone 安裝及驗證限制見 [iOS 說明](ios/README.md)。
 
 每次交付的內容記錄於 [更新紀錄](CHANGELOG.md)，後續更新流程見 [版本管理說明](CONTRIBUTING.md)。GitHub 的 Commits 可查看逐次差異，Tags 對應各次交付的原始碼快照。
 

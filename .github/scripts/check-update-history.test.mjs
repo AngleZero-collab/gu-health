@@ -7,7 +7,10 @@ const newEntry = '+## [android-2.1.1] - 2026-11-09\n+\n+- 修正完成日期顯�
 test('requires history for web, Android, build and automation changes', () => {
   for (const path of ['app.js', 'android/app/src/main/java/Report.java', 'android/app/src/main/res/layout/report.xml',
     'android/build-android.ps1', 'android/gradlew.bat', 'android/gradle/wrapper/gradle-wrapper.properties',
-    '.github/workflows/update-history.yml']) {
+    '.github/workflows/update-history.yml', 'ios/GuHealth/Core/Models.swift',
+    'ios/GuHealth/Resources/Info.plist', 'ios/GuHealth.xcodeproj/project.pbxproj',
+    'ios/GuHealthUITests/GuHealthUITests.swift', 'ios/GuHealthCoreTests/GuHealthCoreTests.swift',
+    'ios/scripts/generate-project.py', 'ios/Package.swift']) {
     assert.equal(needsUpdateHistory([path]), true, path);
   }
 });
