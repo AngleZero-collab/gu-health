@@ -3,6 +3,16 @@
 繁體中文原生手機 APP，Java + XML Android Views + Material Components，非 WebView。
 套件名稱維持 `com.gucare.health`，版本 `2.1.0 / versionCode 3`，支援 Android 8.0 以上。
 
+## 新功能開發分支：居家健康自我觀察
+
+本分支新增原生 `SelfCheckActivity`，由「居家觀察」進入八項逐步自測：畫鐘、FAST、中老年小腿手指圈、五次坐站、睜眼單腳平衡、Phalen、直抬腿症狀紀錄及指甲回血。畫鐘畫布不保存；主觀回答和計時結果經使用者同意後存於目前健康檔案既有 SQLite `records` 表，無需升級 schema。
+
+這些觀察不提供診斷；FAST 突然異常立即指示撥打 119。直抬腿不要求家人施力，平衡測驗保持睜眼及扶手保護。仍應由醫事人員審核文字與適用族群。
+
+### 手機測試 APK
+
+GitHub Actions 工作流程 `Android self-check APK` 成功完成後，在對應執行頁面「Artifacts」取得 `GuHealth-selfchecks-Android-debug`，解壓縮後安裝 APK。這是測試版，**建置及裝置安裝是否成功需以 GitHub Actions 執行結果及手機實際操作確認**。若既有安裝檔的簽署金鑰不同，Android 無法覆蓋更新；請先匯出備份，勿直接解除安裝導致私人資料消失。APK 僅含基本版，不包含 Qwen 本機模型。
+
 ## 安裝與更新
 
 基本版安裝檔為 `dist/GuHealth-Android-2.1-basic-debug.apk`。內建模型版為 `dist/GuHealth-Android-2.1-local-ai-arm64-debug.apk`，適用 ARM64 裝置。兩者擇一安裝。
