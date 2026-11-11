@@ -15,6 +15,8 @@ import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.text.InputType;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -104,7 +106,9 @@ public final class SelfCheckActivity extends Activity {
         if(test==0&&step==0){drawing=new Drawing();ui.spaceAdd(body,drawing,14);add("以手指畫鐘。不會自動評分或保存畫布圖像。");secondary("清除重畫",()->drawing.clear());}
         else if((test==3||test==4||test==5||test==7)&&step==0){showTimer();}
         else if(options!=null){for(String opt:options){button(opt,()->{answers.set(step,opt);if(test==1&&(opt.equals("有")||opt.equals("不確定")))emergency();else if(test==6&&step==1&&opt.equals("有"))emergencyBack();else next();});}}
-        else add("如果症狀突然出現，請立即打 119，記錄最後正常時間。");
+        else {add("如果症狀突然出現，請立即打 119，記錄最後正常時間。");
+            EditText lastWell=new EditText(this);lastWell.setSingleLine(true);lastWell.setTextSize(20);lastWell.setHint("最後正常時間，例如 14:20");lastWell.setText(answers.get(step));lastWell.addTextChangedListener(new android.text.TextWatcher(){public void beforeTextChanged(CharSequence v,int st,int c,int a){} public void onTextChanged(CharSequence v,int st,int before,int count){answers.set(step,v.toString());} public void afterTextChanged(android.text.Editable v){}});ui.spaceAdd(body,lastWell,12);
+        }
         if(step>0)secondary("上一步",()->{step--;renderStep();});
         if(options==null)button("下一步",this::next);
         secondary("取消並返回列表",this::showList);
