@@ -1,5 +1,5 @@
-const CACHE_NAME = 'care-health-v8';
-const APP_SHELL = ['./', './index.html', './styles.css?v=8', './app.js?v=8', './manifest.webmanifest?v=8', './icon.svg'];
+const CACHE_NAME = 'care-health-v9';
+const APP_SHELL = ['./', './index.html', './styles.css?v=9', './app.js?v=9', './manifest.webmanifest?v=9', './icon.svg', './self-checks.html'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
