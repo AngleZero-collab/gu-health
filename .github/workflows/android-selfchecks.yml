@@ -1,0 +1,32 @@
+name: Android self-check APK
+on:
+  push:
+    branches: [feature/home-health-self-checks]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android SDK
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - name: Build basic debug APK
+        run: bash ./gradlew --no-daemon assembleDebug
+      - name: Run unit tests
+        run: bash ./gradlew --no-daemon testDebugUnitTest
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: GuHealth-selfchecks-Android-debug
+          path: android/app/build/outputs/apk/debug/*.apk
+          retention-days: 14
