@@ -314,7 +314,10 @@ public class MainActivity extends Activity {
     private void vision(){
         heading("居家觀察","一次看一眼，記下自己的視覺變化。");
         info(body,"這不是視力檢查或醫療診斷。看得清楚，也不能排除眼睛疾病。",Ui.ORANGE,Ui.PEACH);
-        ui.gap(body,24);ui.add(body,ui.button("開始方格觀察",this::startVision));
+        ui.gap(body,24);
+        ui.add(body,ui.button("八項居家健康自我觀察",()->startActivity(new Intent(this,SelfCheckActivity.class).putExtra(SelfCheckActivity.PROFILE_ID,profile.id))));
+        ui.spaceAdd(body,ui.text("包含畫鐘、FAST、肌力、平衡、手部神經、放射痛及末梢循環。主觀觀察不代表診斷。",18,Ui.MUTED,false),12);
+        ui.spaceAdd(body,ui.button("開始方格觀察",this::startVision),18);
         ui.spaceAdd(body,ui.secondary("前鏡頭輔助對位",this::frontCamera),16);
         ui.spaceAdd(body,ui.text("相機只顯示即時畫面，不拍照、不儲存、不上傳。可以完全不使用相機。",18,Ui.MUTED,false),12);
         ui.gap(body,24);info(body,"若突然視力下降、視線扭曲或出現黑影，請儘速就醫，不要等待下一次觀察。",Ui.ORANGE,Ui.PEACH);
